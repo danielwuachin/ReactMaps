@@ -5,6 +5,8 @@ import mapboxgl from "!mapbox-gl";
 import { useContext, useLayoutEffect, useRef } from "react";
 import { PlacesContext, MapContext } from "../context";
 import { Loading } from "./Loading";
+import { SearchBar } from "./SearchBar";
+import { BtnMyLocation } from "./BtnMyLocation";
 
 export const MapView = () => {
   /* 
@@ -39,18 +41,22 @@ recuerda SIEMPRE importar el contexto y usarlo asi para poder tener acceso a lo 
   }
 
   return (
-    <div
-      ref={mapDiv}
-      style={{
-        height: "100vh",
-        left: 0,
-        position: "fixed",
-        top: 0,
-        width: "100vw",
-      }}
-    >
-      {/* el ? significa que si userLocation es true, ejecuta el join, sino no hagas nada */}
-      {userLocation?.join(",")}
-    </div>
+    <>
+      <BtnMyLocation />
+      <SearchBar />
+      <div
+        ref={mapDiv}
+        style={{
+          height: "100vh",
+          left: 0,
+          position: "fixed",
+          top: 0,
+          width: "100vw",
+        }}
+      >
+        {/* el ? significa que si userLocation es true, ejecuta el join, sino no hagas nada */}
+        {userLocation?.join(",")}
+      </div>
+    </>
   );
 };

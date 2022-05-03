@@ -26,7 +26,7 @@ export const SearchBar = () => {
       <input
         type="text"
         className="form-control"
-        placeholder="Buscar lugar..."
+        placeholder="Search..."
         onChange={onQueryChange}
       />
 

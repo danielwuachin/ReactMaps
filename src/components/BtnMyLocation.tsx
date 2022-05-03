@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { MapContext } from "../context/map/MapContext";
 import { PlacesContext } from "../context/places/PlacesContext";
+import locationWhite from "../locationWhite.svg";
 
 export const BtnMyLocation = () => {
   const { map, isMapReady } = useContext(MapContext);
@@ -20,7 +21,7 @@ export const BtnMyLocation = () => {
 
   return (
     <button
-      className="btn btn-primary"
+      className="btn btn-primary shadow"
       style={{
         position: "fixed",
         top: "20px",
@@ -29,7 +30,16 @@ export const BtnMyLocation = () => {
       }}
       onClick={onClick}
     >
-      Mi ubicacion
+      You
+      <img
+        alt="your location icon"
+        src={locationWhite}
+        style={{
+          marginLeft: "4px",
+          width: "1.1rem",
+          height: "1.1rem",
+        }}
+      />
     </button>
   );
 };

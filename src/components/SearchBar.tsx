@@ -1,8 +1,11 @@
-import { ChangeEvent, useRef, useContext } from "react";
+import { ChangeEvent, useRef, useContext, useState } from "react";
 import { PlacesContext } from "../context";
 import { SearchResults } from "./SearchResults";
+
 export const SearchBar = () => {
   const { searchPlacesByTerm } = useContext(PlacesContext);
+
+  const [visible, setVisible] = useState(false);
 
   /* //debounce: haremos que la funcion se ejecute despues de cierto tiempo luego que el usuario pulse una ultima tecla
   
@@ -21,16 +24,23 @@ export const SearchBar = () => {
     }, 500);
   };
 
+  const onQueryFocus = () => {
+    setVisible(true);
+  };
+
   return (
-    <div className="search-container">
+    <div
+      className={`search-container ${visible ? "" : "search-container-hide"}`}
+    >
       <input
-        type="text"
+        type="search"
         className="form-control"
         placeholder="Search..."
         onChange={onQueryChange}
+        onFocus={onQueryFocus}
       />
 
-      <SearchResults />
+      <SearchResults setVisible={setVisible} visible={visible} />
     </div>
   );
 };

@@ -4,11 +4,24 @@ import { MapContext, PlacesContext } from "../context";
 import { LoadingPlaces } from "./";
 import { Feature } from "../interfaces/places";
 
-export const SearchResults = () => {
+interface Props {
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
+}
+
+export const SearchResults = ({ setVisible, visible }: Props) => {
   const { isLoadingPlaces, places, userLocation } = useContext(PlacesContext);
   const { map, getRouteBetweenPoints } = useContext(MapContext);
 
   const [activeId, setActiveId] = useState("");
+
+  /* 
+  gonzalo.duran@securitaschile.com
+  sdoporte control operacional 
+  controlaodres nocturons
+  supervisar que la app corra bien 
+  4x4
+  12 horas con colacion */
 
   //para volar al hacer click en un resultado de busqueda
   const onPlaceClicked = (place: Feature) => {
@@ -21,6 +34,8 @@ export const SearchResults = () => {
       zoom: 14,
       center: [lng, lat],
     });
+
+    setVisible(false);
   };
 
   // para las direcciones
@@ -29,6 +44,8 @@ export const SearchResults = () => {
 
     const [lng, lat] = place.center;
     getRouteBetweenPoints(userLocation, [lng, lat]);
+
+    setVisible(false);
   };
 
   if (isLoadingPlaces) {
@@ -41,7 +58,7 @@ export const SearchResults = () => {
   }
 
   return (
-    <ul className="list-group mt-3">
+    <ul className={`list-group ${visible ? "" : "hide"}`}>
       {places.map((place) => (
         <li
           key={place.id}

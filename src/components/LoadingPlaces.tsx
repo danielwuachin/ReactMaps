@@ -1,10 +1,14 @@
 import React from "react";
-
+import "./Loading.css";
 export const LoadingPlaces = () => {
   return (
     <div className="alert alert-primary-mt-2 text-center">
-      <h6>Buscando</h6>
-      <p>Espere por favor...</p>
+      <div className="lds-ellipsis text-center">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 };
